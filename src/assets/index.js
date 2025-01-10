@@ -15,6 +15,9 @@ import angular from "./tech/angular.png";
 import vue from "./tech/vue.png";
 import styledComponents from "./tech/styledComponents.png";
 import python from "./tech/python.png";
+import bistro from "./bistro.png";
+import shopwise from "./shopwise.png";
+import activitiesArchive from "./activityarchive.png";
 
 export {
   css,
@@ -34,4 +37,7 @@ export {
   vue,
   styledComponents,
   python,
+  bistro,
+  shopwise,
+  activitiesArchive,
 };

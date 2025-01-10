@@ -12,7 +12,7 @@ export const navLinks = [
     name: "Projects",
   },
   {
-    id: "eductaion",
+    id: "education",
     name: "Education",
   },
   {
@@ -47,6 +47,9 @@ import {
   tailwind,
   vue,
   python,
+  bistro,
+  shopwise,
+  activitiesArchive,
 } from "../assets";
 
 export const skills = [
@@ -97,5 +100,151 @@ export const skills = [
       { name: "Vue", image: vue },
       { name: "NodeJS", image: nodejs },
     ],
+  },
+];
+
+export const projects = [
+  {
+    name: "Bistro Bliss",
+    description:
+      "A restaurant website that showcases the menu, services, and contact information.",
+    tags: [
+      {
+        name: "HTML",
+        color: "text-red-500",
+      },
+      {
+        name: "CSS",
+        color: "text-blue-500",
+      },
+      {
+        name: "Javascript",
+        color: "text-yellow-500",
+      },
+      {
+        name: "ReactJS",
+        color: "text-blue-500",
+      },
+      {
+        name: "Responsive Design",
+        color: "text-blue-500",
+      },
+      {
+        name: "Laravel",
+        color: "text-red-500",
+      },
+      {
+        name: "REST API",
+        color: "text-yellow-500",
+      },
+      {
+        name: "MySQL",
+        color: "text-blue-500",
+      },
+    ],
+    image: bistro,
+    source_code_link: "https://github.com/Amr-3009/front-end-final-project",
+    live_link: "https://front-end-final-project-omega.vercel.app/home",
+  },
+  {
+    name: "Shopwise",
+    description:
+      "An e-commerce website that allows users to browse products, add them to the cart, and checkout.",
+    tags: [
+      {
+        name: "HTML",
+        color: "text-red-500",
+      },
+      {
+        name: "CSS",
+        color: "text-blue-500",
+      },
+      {
+        name: "Javascript",
+        color: "text-yellow-500",
+      },
+      {
+        name: "ReactJS",
+        color: "text-blue-500",
+      },
+      {
+        name: "Responsive Design",
+        color: "text-blue-500",
+      },
+      {
+        name: "REST API",
+        color: "text-yellow-500",
+      },
+      {
+        name: "Tailwind",
+        color: "text-blue-500",
+      },
+    ],
+    image: shopwise,
+    source_code_link: "https://github.com/Amr-3009/front-end_project",
+    live_link: "https://amr-3009.github.io/front-end_project/",
+  },
+  {
+    name: "Activities Archive",
+    description:
+      "The Activities Archive project is a web-based platform created for Tarbyh Namouthajiyah Schools. It serves as an archive to document and display various school activities. ",
+    tags: [
+      {
+        name: "HTML",
+        color: "text-red-500",
+      },
+      {
+        name: "CSS",
+        color: "text-blue-500",
+      },
+      {
+        name: "Javascript",
+        color: "text-yellow-500",
+      },
+      {
+        name: "ReactJS",
+        color: "text-blue-500",
+      },
+      {
+        name: "Responsive Design",
+        color: "text-blue-500",
+      },
+    ],
+    image: activitiesArchive,
+    source_code_link: "https://github.com/Amr-3009/qurtuba-complex",
+    live_link: "https://qurtuba-complex.vercel.app/",
+  },
+];
+
+export const education = [
+  {
+    degree: "Bachelor of Engineering",
+    major: "Mechatronics Engineering",
+    university: "Ain Shams University",
+    graduationYear: "2022",
+  },
+];
+
+export const courses = [
+  {
+    course: "Full Stack PHP Diploma",
+    institution: "AMIT Learning",
+    year: "2023-2024",
+    certificate_link:
+      "https://drive.google.com/file/d/1d9JSaOmnmSbxB6j0kP2qU1V9uX4Xvlf-/view",
+  },
+  {
+    course: "Complete Python Bootcamp",
+    institution: "Udemy",
+    year: "2022",
+    certificate_link:
+      "https://www.udemy.com/certificate/UC-d63da164-f223-4867-a2b1-693ee297a36f/",
+  },
+  {
+    course: "Web Development Track",
+    institution: "Udacity",
+    year: "2023",
+    certificate_link:
+      "https://drive.google.com/file/d/13Of-J2jVI1fIQoj3GJze6RVbvvElxOdx/view",
   },
 ];

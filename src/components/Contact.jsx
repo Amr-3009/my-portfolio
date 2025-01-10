@@ -3,15 +3,9 @@ import { textVariants, containerVariants } from "../animations/motion";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import { useState, useRef } from "react";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { MdDownload } from "react-icons/md";
-
-//template_2ytl0jj
-//service_1fgx4bh
-//WmGXz6if7_TBgoDaN
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { MdEmail, MdDownload } from "react-icons/md";
+import { gitHubLink, linkedInLink, cvLink } from "../variables";
 
 const Contact = () => {
   const formRef = useRef();
@@ -21,10 +15,12 @@ const Contact = () => {
     message: "",
   });
   const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,8 +40,6 @@ const Contact = () => {
       )
       .then((response) => {
         console.log("Email sent successfully!", response);
-
-        // Try forcing the toast to run in the next tick
         setTimeout(() => {
           toast.success(
             "Thank you. I will get back to you as soon as possible."
@@ -61,14 +55,13 @@ const Contact = () => {
       })
       .catch((error) => {
         console.log("Failed to send email:", error);
-
         setTimeout(() => {
           toast.error("Something went wrong. Please try again later.");
         }, 0);
-
         setLoading(false);
       });
   };
+
   return (
     <>
       <ToastContainer
@@ -81,8 +74,8 @@ const Contact = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark" // to match your dark theme
-        className="z-5000000" // Add this to ensure it's above other elements
+        theme="dark"
+        className="z-50"
       />
       <section id="contact" className="bg-darkSlateBlue py-16">
         <motion.div
@@ -103,69 +96,141 @@ const Contact = () => {
           </div>
         </motion.div>
 
-        <motion.div
-          className="max-w-4xl mx-auto px-4 mt-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <div className="bg-steelBlue rounded-lg p-8 shadow-lg">
-            <form className="space-y-6" ref={formRef} onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-pureWhite mb-2">
-                    Name
-                  </label>
-                  <input
-                    onChange={handleChange}
-                    value={form.name}
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
-                    placeholder="Your Name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-pureWhite mb-2">
-                    Email
-                  </label>
-                  <input
-                    onChange={handleChange}
-                    value={form.email}
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
-                    placeholder="your@email.com"
-                  />
+        <div className="max-w-7xl mx-auto px-4 mt-16">
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Contact Form Section */}
+            <motion.div
+              className="lg:w-2/3"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="bg-steelBlue rounded-lg p-8 shadow-lg h-full">
+                <form
+                  className="space-y-6"
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="block text-pureWhite mb-2"
+                      >
+                        Name
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        value={form.name}
+                        type="text"
+                        id="name"
+                        name="name"
+                        className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
+                        placeholder="Your Name"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="block text-pureWhite mb-2"
+                      >
+                        Email
+                      </label>
+                      <input
+                        onChange={handleChange}
+                        value={form.email}
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block text-pureWhite mb-2"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      onChange={handleChange}
+                      value={form.message}
+                      rows="7"
+                      className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
+                      placeholder="Your message..."
+                      style={{ resize: "none" }}
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full md:w-auto px-8 py-3 bg-pureWhite text-darkSlateBlue font-semibold rounded-md hover:bg-mutedBeige transition-colors duration-300"
+                  >
+                    {loading ? "Sending..." : "Send"}
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+            {/* Social Links Section */}
+            <motion.div
+              className="lg:w-1/3"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="bg-steelBlue rounded-lg p-8 shadow-lg h-full order-2">
+                <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
+                  <a
+                    href={gitHubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
+                  >
+                    <FaGithub className="text-2xl" />
+                    <span>GitHub</span>
+                  </a>
+                  <a
+                    href={linkedInLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
+                  >
+                    <FaLinkedin className="text-2xl" />
+                    <span>LinkedIn</span>
+                  </a>
+                  <a
+                    href="https://wa.me/+201013107960"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
+                  >
+                    <FaWhatsapp className="text-2xl" />
+                    <span>(+20) 1013107960</span>
+                  </a>
+                  <div className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300">
+                    <MdEmail className="text-xl" />
+                    <a href="mailto:amrosama1k@gmail.com">
+                      amrosama1k@gmail.com
+                    </a>
+                  </div>
+                  <a
+                    href={cvLink}
+                    download
+                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
+                  >
+                    <MdDownload className="text-2xl" />
+                    <span className="text-sm md:text-base">Download CV</span>
+                  </a>
                 </div>
               </div>
-              <div>
-                <label htmlFor="message" className="block text-pureWhite mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  onChange={handleChange}
-                  value={form.message}
-                  rows="7"
-                  className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
-                  placeholder="Your message..."
-                  style={{ resize: "none" }}
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full md:w-auto px-8 py-3 bg-pureWhite text-darkSlateBlue font-semibold rounded-md hover:bg-mutedBeige transition-colors duration-300"
-              >
-                {loading ? "Sending..." : "Send"}
-              </button>
-            </form>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
       </section>
     </>
   );
