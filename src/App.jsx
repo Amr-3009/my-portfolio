@@ -1,5 +1,14 @@
 import { BrowserRouter } from "react-router-dom";
-import { Navbar, Hero, About } from "./components";
+import {
+  Navbar,
+  Hero,
+  About,
+  Skills,
+  Projects,
+  Education,
+  Contact,
+  Footer,
+} from "./components";
 
 function App() {
   return (
@@ -7,6 +16,11 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Skills />
+      <Projects />
+      <Education />
+      <Contact />
+      <Footer />
     </BrowserRouter>
   );
 }

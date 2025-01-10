@@ -12,7 +12,3 @@
   scroll-behavior: smooth;
   color-scheme: dark;
 }
-
-.scroll-indicator {
-  cursor: pointer !important;
-}
