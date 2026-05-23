@@ -143,11 +143,11 @@ const Hero = () => {
               Digital Twin Engineer in Training
             </p>
             <p className="text-base sm:text-lg text-gray-400 mt-2">
-              Code. Solve. Grow — Fueled by passion and grit.
+              Code. Solve. Grow. Fueled by passion and grit.
             </p>
             <p className="text-sm sm:text-base lg:text-lg text-gray-400 mt-2 max-w-xs sm:max-w-md mx-auto sm:mx-0">
               Mechatronics Engineer &amp; Web Developer building toward Digital
-              Twin systems — bridging IoT, machine learning, and simulation to
+              Twin systems bridging IoT, machine learning, and simulation to
               connect the physical and digital worlds.
             </p>
           </div>

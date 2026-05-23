@@ -8,6 +8,7 @@ import {
   FaUtensils,
   FaShoppingCart,
   FaSchool,
+  FaParking,
 } from "react-icons/fa";
 import { MdOpenInNew } from "react-icons/md";
 import bistro from "../assets/bistro.png";
@@ -57,6 +58,20 @@ const projects = [
   },
   {
     id: 3,
+    icon: <FaParking />,
+    name: "Smart Parking Digital Twin",
+    subtitle: "NTI Graduation Project — Team Project, 2026",
+    description:
+      "A Digital Twin system that solves garage traffic congestion by redirecting cars to lanes with open slots in real time. One Unity client simulates the physical garage with sensors that publish occupancy data to a Mosquitto MQTT broker — a second Unity client acts as the digital twin, instantly reflecting slot changes and guiding incoming cars accordingly. AI integration for predictive slot allocation is planned.",
+    tags: ["Unity", "MQTT", "Mosquitto", "Digital Twin", "IoT", "Python"],
+    image: null,
+    links: [],
+    featured: true,
+    color: "gold",
+    status: "In Development",
+  },
+  {
+    id: 6,
     icon: <FaUtensils />,
     name: "Bistro Bliss",
     subtitle: "Restaurant Website with Full Stack Backend",
@@ -128,7 +143,7 @@ const projects = [
     color: "cyan",
   },
   {
-    id: 6,
+    id: 7,
     icon: <FaMicrochip />,
     name: "Control Systems & Automation",
     subtitle: "Arduino & Python Engineering Projects",
@@ -343,11 +358,11 @@ const ProjectCard = ({ project, index }) => {
           </div>
         ) : (
           <div className="mt-auto">
-            <span className="text-[11px] text-[#2D3748] italic">
-              {project.status === "In Development"
-                ? "Repository private — in active development"
-                : "Project files available on request"}
-            </span>
+            {project.status === "In Development" && (
+              <span className="text-[11px] text-[#2D3748] italic">
+                Repository private — in active development
+              </span>
+            )}
           </div>
         )}
       </div>

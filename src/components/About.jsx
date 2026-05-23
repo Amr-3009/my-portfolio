@@ -7,7 +7,11 @@ const fadeUp = {
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: {
+      duration: 0.7,
+      delay: i * 0.15,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
   }),
 };
 
@@ -76,17 +80,14 @@ const About = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <span
-            className="inline-block text-[11px] tracking-[4px] uppercase text-[#00D4FF] border border-[rgba(0,212,255,0.3)] px-4 py-1.5 rounded-full mb-3"
-          >
+          <span className="inline-block text-[11px] tracking-[4px] uppercase text-[#00D4FF] border border-[rgba(0,212,255,0.3)] px-4 py-1.5 rounded-full mb-3">
             Who I Am
           </span>
           <h2
             className="text-4xl md:text-5xl font-black text-white"
             style={{ fontFamily: "'Syne', sans-serif" }}
           >
-            Know Me{" "}
-            <span className="text-[#F0B429]">More</span>
+            Know Me <span className="text-[#F0B429]">More</span>
           </h2>
           <div className="w-16 h-[2px] bg-[#00D4FF] mx-auto mt-4 opacity-60" />
         </motion.div>
@@ -112,19 +113,16 @@ const About = () => {
             </p>
             <p className="text-[#8892A4] text-base leading-[1.9] mb-5">
               My background sits at the intersection of hardware, software, and
-              intelligent systems — from building responsive web apps with{" "}
+              intelligent systems. from building responsive web apps with{" "}
               <span className="text-[#00D4FF] font-medium">React</span> to
               working with{" "}
-              <span className="text-[#00D4FF] font-medium">
-                IoT protocols
-              </span>
-              , machine learning, and 3D simulation tools like Unity and
-              Blender.
+              <span className="text-[#00D4FF] font-medium">IoT protocols</span>,
+              machine learning, and 3D simulation tools like Unity and Blender.
             </p>
             <p className="text-[#8892A4] text-base leading-[1.9]">
               I&apos;m drawn to engineering problems that require thinking
               across disciplines, and I&apos;m building toward a career in
-              Digital Twin development — where physical and digital worlds{" "}
+              Digital Twin development. Where physical and digital worlds{" "}
               <span className="text-[#F0B429]">converge</span>.
             </p>
 

@@ -328,7 +328,7 @@ const Timeline = () => {
           viewport={{ once: true, amount: 0.3 }}
         >
           <span className="inline-block text-[11px] tracking-[4px] uppercase text-[#00D4FF] border border-[rgba(0,212,255,0.3)] px-4 py-1.5 rounded-full mb-3">
-            WHAT I'VE DONE
+            My Journey
           </span>
           <h2
             className="text-4xl md:text-5xl font-black text-white"
@@ -337,6 +337,35 @@ const Timeline = () => {
             Experience & <span className="text-[#F0B429]">Education</span>
           </h2>
           <div className="w-16 h-[2px] bg-[#00D4FF] mx-auto mt-4 opacity-60" />
+          <div className="mt-6">
+            <a
+              href="https://drive.google.com/drive/folders/1ArYPb-o__XKrmRry-7khxKst17iNHmS2?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[12px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              style={{
+                background: "rgba(240,180,41,0.08)",
+                color: "#F0B429",
+                border: "1px solid rgba(240,180,41,0.25)",
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              View All Certificates
+            </a>
+          </div>
         </motion.div>
 
         {/* Timeline */}
