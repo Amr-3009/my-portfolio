@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
-import { useState, useRef } from "react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdContentCopy } from "react-icons/md";
 import { gitHubLink, linkedInLink } from "../variables";
 
 const fadeUp = {
@@ -19,93 +17,52 @@ const fadeUp = {
   }),
 };
 
-const socialLinks = [
+const contactCards = [
   {
-    icon: <FaGithub className="text-xl" />,
-    label: "GitHub",
-    value: "Amr-3009",
-    href: gitHubLink,
-    color: "white",
-  },
-  {
-    icon: <FaLinkedin className="text-xl" />,
-    label: "LinkedIn",
-    value: "amrosamaeg",
-    href: linkedInLink,
-    color: "cyan",
-  },
-  {
-    icon: <FaWhatsapp className="text-xl" />,
-    label: "WhatsApp",
-    value: "(+20) 1013107960",
-    href: "https://wa.me/+201013107960",
-    color: "cyan",
-  },
-  {
-    icon: <MdEmail className="text-xl" />,
+    icon: <MdEmail className="text-2xl" />,
     label: "Email",
     value: "amrosama1k@gmail.com",
     href: "mailto:amrosama1k@gmail.com",
+    copyable: true,
+    color: "gold",
+  },
+  {
+    icon: <FaWhatsapp className="text-2xl" />,
+    label: "WhatsApp",
+    value: "(+20) 1013107960",
+    href: "https://wa.me/+201013107960",
+    copyable: true,
     color: "cyan",
+  },
+  {
+    icon: <FaLinkedin className="text-2xl" />,
+    label: "LinkedIn",
+    value: "amrosamaeg",
+    href: linkedInLink,
+    copyable: false,
+    color: "cyan",
+  },
+  {
+    icon: <FaGithub className="text-2xl" />,
+    label: "GitHub",
+    value: "Amr-3009",
+    href: gitHubLink,
+    copyable: false,
+    color: "white",
   },
 ];
 
-const inputClass =
-  "w-full px-4 py-3 rounded-lg text-white text-[14px] outline-none transition-all duration-300 border focus:border-[rgba(0,212,255,0.5)] placeholder-[#4A5568]";
-
-const inputStyle = {
-  background: "rgba(255,255,255,0.03)",
-  borderColor: "rgba(0,212,255,0.1)",
-};
-
 const Contact = () => {
-  const formRef = useRef();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    emailjs
-      .send(
-        "service_0i4gqfc",
-        "template_2ytl0jj",
-        {
-          from_name: form.name,
-          to_name: "Amr",
-          from_email: form.email,
-          to_email: "amrosama1k@gmail.com",
-          message: form.message,
-        },
-        "WmGXz6if7_TBgoDaN",
-      )
-      .then(() => {
-        setTimeout(() => {
-          toast.success(
-            "Thank you. I will get back to you as soon as possible.",
-          );
-        }, 0);
-        setLoading(false);
-        setForm({ name: "", email: "", message: "" });
-      })
-      .catch(() => {
-        setTimeout(() => {
-          toast.error("Something went wrong. Please try again later.");
-        }, 0);
-        setLoading(false);
-      });
+  const handleCopy = (value, label) => {
+    navigator.clipboard.writeText(value);
+    toast.success(`${label} copied to clipboard!`);
   };
 
   return (
     <>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         closeOnClick
         draggable
@@ -136,7 +93,7 @@ const Contact = () => {
           }}
         />
 
-        <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="relative z-10 max-w-4xl mx-auto">
           {/* Section Header */}
           <motion.div
             className="text-center mb-16"
@@ -155,174 +112,110 @@ const Contact = () => {
               Contact <span className="text-[#F0B429]">Me</span>
             </h2>
             <div className="w-16 h-[2px] bg-[#00D4FF] mx-auto mt-4 opacity-60" />
-            <p className="text-[#8892A4] text-[14px] mt-4 max-w-md mx-auto">
-              Have a project in mind or want to connect? Drop me a message and
-              I&apos;ll get back to you as soon as possible.
+            <p className="text-[#8892A4] text-[14px] mt-6 max-w-md mx-auto leading-relaxed">
+              I&apos;m currently open to opportunities, collaborations, and
+              conversations. Feel free to reach out through any of the channels
+              below.
             </p>
           </motion.div>
 
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Form */}
-            <motion.div
-              className="lg:w-2/3"
-              variants={fadeUp}
-              custom={1}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <div
-                className="rounded-xl p-8 border h-full"
-                style={{
-                  background: "rgba(15, 23, 41, 0.7)",
-                  borderColor: "rgba(0,212,255,0.1)",
-                  backdropFilter: "blur(8px)",
-                }}
-              >
-                {/* Top accent */}
-                <div
-                  className="h-[2px] w-full mb-8 rounded-full"
+          {/* Contact cards grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contactCards.map((card, index) => {
+              const isCyan = card.color === "cyan";
+              const isGold = card.color === "gold";
+
+              return (
+                <motion.div
+                  key={card.label}
+                  custom={index}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                  className="relative rounded-xl border p-6 flex items-center gap-5 group transition-all duration-300"
                   style={{
-                    background:
-                      "linear-gradient(to right, #00D4FF, transparent)",
-                  }}
-                />
-
-                <form
-                  ref={formRef}
-                  onSubmit={handleSubmit}
-                  className="space-y-5"
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-[12px] tracking-[2px] uppercase text-[#8892A4] mb-2 font-medium">
-                        Name
-                      </label>
-                      <input
-                        onChange={handleChange}
-                        value={form.name}
-                        type="text"
-                        name="name"
-                        className={inputClass}
-                        style={inputStyle}
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[12px] tracking-[2px] uppercase text-[#8892A4] mb-2 font-medium">
-                        Email
-                      </label>
-                      <input
-                        onChange={handleChange}
-                        value={form.email}
-                        type="email"
-                        name="email"
-                        className={inputClass}
-                        style={inputStyle}
-                        placeholder="your@email.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-[12px] tracking-[2px] uppercase text-[#8892A4] mb-2 font-medium">
-                      Message
-                    </label>
-                    <textarea
-                      name="message"
-                      onChange={handleChange}
-                      value={form.message}
-                      rows="7"
-                      className={inputClass}
-                      style={{ ...inputStyle, resize: "none" }}
-                      placeholder="Your message..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="px-8 py-3 rounded-lg text-[13px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                    style={{
-                      background: loading
+                    background: "rgba(15, 23, 41, 0.7)",
+                    borderColor: isGold
+                      ? "rgba(240,180,41,0.15)"
+                      : isCyan
                         ? "rgba(0,212,255,0.1)"
-                        : "rgba(0,212,255,0.12)",
-                      color: "#00D4FF",
-                      border: "1px solid rgba(0,212,255,0.3)",
+                        : "rgba(255,255,255,0.06)",
+                    backdropFilter: "blur(8px)",
+                  }}
+                >
+                  {/* Hover glow */}
+                  <div
+                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      boxShadow: isGold
+                        ? "0 0 24px rgba(240,180,41,0.06)"
+                        : isCyan
+                          ? "0 0 24px rgba(0,212,255,0.05)"
+                          : "0 0 24px rgba(255,255,255,0.03)",
+                    }}
+                  />
+
+                  {/* Icon */}
+                  <div
+                    className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
+                    style={{
+                      background: isGold
+                        ? "rgba(240,180,41,0.08)"
+                        : isCyan
+                          ? "rgba(0,212,255,0.08)"
+                          : "rgba(255,255,255,0.05)",
+                      color: isGold
+                        ? "#F0B429"
+                        : isCyan
+                          ? "#00D4FF"
+                          : "#8892A4",
+                      border: `1px solid ${
+                        isGold
+                          ? "rgba(240,180,41,0.2)"
+                          : isCyan
+                            ? "rgba(0,212,255,0.15)"
+                            : "rgba(255,255,255,0.08)"
+                      }`,
                     }}
                   >
-                    {loading ? "Sending..." : "Send Message"}
-                  </button>
-                </form>
-              </div>
-            </motion.div>
+                    {card.icon}
+                  </div>
 
-            {/* Social links */}
-            <motion.div
-              className="lg:w-1/3"
-              variants={fadeUp}
-              custom={2}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <div
-                className="rounded-xl p-8 border h-full flex flex-col"
-                style={{
-                  background: "rgba(15, 23, 41, 0.7)",
-                  borderColor: "rgba(0,212,255,0.1)",
-                  backdropFilter: "blur(8px)",
-                }}
-              >
-                {/* Top accent */}
-                <div
-                  className="h-[2px] w-full mb-8 rounded-full"
-                  style={{
-                    background:
-                      "linear-gradient(to right, #F0B429, transparent)",
-                  }}
-                />
-
-                <p className="text-[12px] tracking-[3px] uppercase text-[#8892A4] mb-6 font-medium">
-                  Find me on
-                </p>
-
-                <div className="flex flex-col gap-3 flex-1">
-                  {socialLinks.map((link) => (
+                  {/* Text */}
+                  <div className="flex-1 min-w-0 relative z-10">
+                    <p className="text-[11px] tracking-[2px] uppercase text-[#4A5568] mb-1">
+                      {card.label}
+                    </p>
                     <a
-                      key={link.label}
-                      href={link.href}
+                      href={card.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 px-4 py-3 rounded-lg border transition-all duration-300 group"
-                      style={{
-                        background: "rgba(255,255,255,0.02)",
-                        borderColor:
-                          link.color === "cyan"
-                            ? "rgba(0,212,255,0.08)"
-                            : "rgba(255,255,255,0.06)",
-                      }}
+                      className="text-[14px] font-medium text-white hover:text-[#00D4FF] transition-colors duration-300 truncate block"
                     >
-                      <span
-                        className="shrink-0 transition-colors duration-300"
-                        style={{
-                          color: link.color === "cyan" ? "#00D4FF" : "#8892A4",
-                        }}
-                      >
-                        {link.icon}
-                      </span>
-                      <div className="min-w-0">
-                        <p className="text-[11px] tracking-[1px] uppercase text-[#4A5568]">
-                          {link.label}
-                        </p>
-                        <p className="text-[12px] text-[#8892A4] group-hover:text-white transition-colors duration-300 truncate">
-                          {link.value}
-                        </p>
-                      </div>
+                      {card.value}
                     </a>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+                  </div>
+
+                  {/* Copy button */}
+                  {card.copyable && (
+                    <button
+                      onClick={() => handleCopy(card.value, card.label)}
+                      className="shrink-0 w-8 h-8 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 relative z-10"
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        color: "#4A5568",
+                      }}
+                      title={`Copy ${card.label}`}
+                    >
+                      <MdContentCopy className="text-sm" />
+                    </button>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
