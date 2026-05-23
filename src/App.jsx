@@ -5,9 +5,10 @@ import {
   About,
   Skills,
   Projects,
-  Education,
+  // Education,
   Contact,
   Footer,
+  Timeline,
 } from "./components";
 
 function App() {
@@ -16,9 +17,10 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Timeline />
       <Skills />
       <Projects />
-      <Education />
+      {/* <Education /> */}
       <Contact />
       <Footer />
     </BrowserRouter>

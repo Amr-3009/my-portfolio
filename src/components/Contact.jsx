@@ -1,19 +1,66 @@
 import { motion } from "framer-motion";
-import { textVariants, containerVariants } from "../animations/motion";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import { useState, useRef } from "react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { MdEmail, MdDownload } from "react-icons/md";
-import { gitHubLink, linkedInLink, cvLink } from "../variables";
+import { MdEmail } from "react-icons/md";
+import { gitHubLink, linkedInLink } from "../variables";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      delay: i * 0.1,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  }),
+};
+
+const socialLinks = [
+  {
+    icon: <FaGithub className="text-xl" />,
+    label: "GitHub",
+    value: "Amr-3009",
+    href: gitHubLink,
+    color: "white",
+  },
+  {
+    icon: <FaLinkedin className="text-xl" />,
+    label: "LinkedIn",
+    value: "amrosamaeg",
+    href: linkedInLink,
+    color: "cyan",
+  },
+  {
+    icon: <FaWhatsapp className="text-xl" />,
+    label: "WhatsApp",
+    value: "(+20) 1013107960",
+    href: "https://wa.me/+201013107960",
+    color: "cyan",
+  },
+  {
+    icon: <MdEmail className="text-xl" />,
+    label: "Email",
+    value: "amrosama1k@gmail.com",
+    href: "mailto:amrosama1k@gmail.com",
+    color: "cyan",
+  },
+];
+
+const inputClass =
+  "w-full px-4 py-3 rounded-lg text-white text-[14px] outline-none transition-all duration-300 border focus:border-[rgba(0,212,255,0.5)] placeholder-[#4A5568]";
+
+const inputStyle = {
+  background: "rgba(255,255,255,0.03)",
+  borderColor: "rgba(0,212,255,0.1)",
+};
 
 const Contact = () => {
   const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -23,7 +70,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setLoading(true);
     emailjs
       .send(
@@ -36,25 +82,18 @@ const Contact = () => {
           to_email: "amrosama1k@gmail.com",
           message: form.message,
         },
-        "WmGXz6if7_TBgoDaN"
+        "WmGXz6if7_TBgoDaN",
       )
-      .then((response) => {
-        console.log("Email sent successfully!", response);
+      .then(() => {
         setTimeout(() => {
           toast.success(
-            "Thank you. I will get back to you as soon as possible."
+            "Thank you. I will get back to you as soon as possible.",
           );
         }, 0);
-
         setLoading(false);
-        setForm({
-          name: "",
-          email: "",
-          message: "",
-        });
+        setForm({ name: "", email: "", message: "" });
       })
-      .catch((error) => {
-        console.log("Failed to send email:", error);
+      .catch(() => {
         setTimeout(() => {
           toast.error("Something went wrong. Please try again later.");
         }, 0);
@@ -68,164 +107,219 @@ const Contact = () => {
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
-        newestOnTop={false}
         closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="dark"
         className="z-50"
       />
-      <section id="contact" className="bg-darkSlateBlue py-16">
-        <motion.div
-          className="relative flex flex-col items-center justify-center h-32"
-          variants={textVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <h2 className="text-[10vw] md:text-[80px] font-bold text-mutedBeige opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 whitespace-nowrap uppercase">
-            Get in Touch
-          </h2>
-          <div className="relative z-10 mt-4">
-            <h3 className="text-xl md:text-2xl font-bold text-pureWhite">
-              Contact Me
-            </h3>
-            <div className="w-16 md:w-24 h-[2px] bg-steelBlue mx-auto mt-2" />
-          </div>
-        </motion.div>
 
-        <div className="max-w-7xl mx-auto px-4 mt-16">
+      <section
+        id="contact"
+        className="relative bg-[#060B15] py-24 px-6 overflow-hidden"
+      >
+        {/* Watermark */}
+        <span
+          className="pointer-events-none select-none absolute top-8 left-1/2 -translate-x-1/2 text-[120px] font-black tracking-[16px] text-[#00D4FF] opacity-[0.03] whitespace-nowrap"
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
+          CONTACT
+        </span>
+
+        {/* Grid texture */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0,212,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.5) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto">
+          {/* Section Header */}
+          <motion.div
+            className="text-center mb-16"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <span className="inline-block text-[11px] tracking-[4px] uppercase text-[#00D4FF] border border-[rgba(0,212,255,0.3)] px-4 py-1.5 rounded-full mb-3">
+              Get In Touch
+            </span>
+            <h2
+              className="text-4xl md:text-5xl font-black text-white"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Contact <span className="text-[#F0B429]">Me</span>
+            </h2>
+            <div className="w-16 h-[2px] bg-[#00D4FF] mx-auto mt-4 opacity-60" />
+            <p className="text-[#8892A4] text-[14px] mt-4 max-w-md mx-auto">
+              Have a project in mind or want to connect? Drop me a message and
+              I&apos;ll get back to you as soon as possible.
+            </p>
+          </motion.div>
+
           <div className="flex flex-col lg:flex-row gap-6">
-            {/* Contact Form Section */}
+            {/* Form */}
             <motion.div
               className="lg:w-2/3"
-              variants={containerVariants}
+              variants={fadeUp}
+              custom={1}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <div className="bg-steelBlue rounded-lg p-8 shadow-lg h-full">
+              <div
+                className="rounded-xl p-8 border h-full"
+                style={{
+                  background: "rgba(15, 23, 41, 0.7)",
+                  borderColor: "rgba(0,212,255,0.1)",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                {/* Top accent */}
+                <div
+                  className="h-[2px] w-full mb-8 rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(to right, #00D4FF, transparent)",
+                  }}
+                />
+
                 <form
-                  className="space-y-6"
                   ref={formRef}
                   onSubmit={handleSubmit}
+                  className="space-y-5"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-pureWhite mb-2"
-                      >
+                      <label className="block text-[12px] tracking-[2px] uppercase text-[#8892A4] mb-2 font-medium">
                         Name
                       </label>
                       <input
                         onChange={handleChange}
                         value={form.name}
                         type="text"
-                        id="name"
                         name="name"
-                        className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
-                        placeholder="Your Name"
+                        className={inputClass}
+                        style={inputStyle}
+                        placeholder="Your name"
                       />
                     </div>
                     <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-pureWhite mb-2"
-                      >
+                      <label className="block text-[12px] tracking-[2px] uppercase text-[#8892A4] mb-2 font-medium">
                         Email
                       </label>
                       <input
                         onChange={handleChange}
                         value={form.email}
                         type="email"
-                        id="email"
                         name="email"
-                        className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
+                        className={inputClass}
+                        style={inputStyle}
                         placeholder="your@email.com"
                       />
                     </div>
                   </div>
+
                   <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-pureWhite mb-2"
-                    >
+                    <label className="block text-[12px] tracking-[2px] uppercase text-[#8892A4] mb-2 font-medium">
                       Message
                     </label>
                     <textarea
-                      id="message"
                       name="message"
                       onChange={handleChange}
                       value={form.message}
                       rows="7"
-                      className="w-full px-4 py-2 rounded-md bg-[#393F44] text-[#FFFFFF] border border-[#85888C] focus:border-[#85888C] focus:border-2 outline-none transition-colors duration-300"
+                      className={inputClass}
+                      style={{ ...inputStyle, resize: "none" }}
                       placeholder="Your message..."
-                      style={{ resize: "none" }}
-                    ></textarea>
+                    />
                   </div>
+
                   <button
                     type="submit"
-                    className="w-full md:w-auto px-8 py-3 bg-pureWhite text-darkSlateBlue font-semibold rounded-md hover:bg-mutedBeige transition-colors duration-300"
+                    className="px-8 py-3 rounded-lg text-[13px] font-bold tracking-wider uppercase transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                    style={{
+                      background: loading
+                        ? "rgba(0,212,255,0.1)"
+                        : "rgba(0,212,255,0.12)",
+                      color: "#00D4FF",
+                      border: "1px solid rgba(0,212,255,0.3)",
+                    }}
                   >
-                    {loading ? "Sending..." : "Send"}
+                    {loading ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               </div>
             </motion.div>
-            {/* Social Links Section */}
+
+            {/* Social links */}
             <motion.div
               className="lg:w-1/3"
-              variants={containerVariants}
+              variants={fadeUp}
+              custom={2}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <div className="bg-steelBlue rounded-lg p-8 shadow-lg h-full order-2">
-                <div className="grid grid-cols-1 lg:grid-cols-1 gap-4">
-                  <a
-                    href={gitHubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
-                  >
-                    <FaGithub className="text-2xl" />
-                    <span>GitHub</span>
-                  </a>
-                  <a
-                    href={linkedInLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
-                  >
-                    <FaLinkedin className="text-2xl" />
-                    <span>LinkedIn</span>
-                  </a>
-                  <a
-                    href="https://wa.me/+201013107960"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
-                  >
-                    <FaWhatsapp className="text-2xl" />
-                    <span>(+20) 1013107960</span>
-                  </a>
-                  <div className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300">
-                    <MdEmail className="text-xl" />
-                    <a href="mailto:amrosama1k@gmail.com">
-                      amrosama1k@gmail.com
+              <div
+                className="rounded-xl p-8 border h-full flex flex-col"
+                style={{
+                  background: "rgba(15, 23, 41, 0.7)",
+                  borderColor: "rgba(0,212,255,0.1)",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                {/* Top accent */}
+                <div
+                  className="h-[2px] w-full mb-8 rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(to right, #F0B429, transparent)",
+                  }}
+                />
+
+                <p className="text-[12px] tracking-[3px] uppercase text-[#8892A4] mb-6 font-medium">
+                  Find me on
+                </p>
+
+                <div className="flex flex-col gap-3 flex-1">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 px-4 py-3 rounded-lg border transition-all duration-300 group"
+                      style={{
+                        background: "rgba(255,255,255,0.02)",
+                        borderColor:
+                          link.color === "cyan"
+                            ? "rgba(0,212,255,0.08)"
+                            : "rgba(255,255,255,0.06)",
+                      }}
+                    >
+                      <span
+                        className="shrink-0 transition-colors duration-300"
+                        style={{
+                          color: link.color === "cyan" ? "#00D4FF" : "#8892A4",
+                        }}
+                      >
+                        {link.icon}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-[11px] tracking-[1px] uppercase text-[#4A5568]">
+                          {link.label}
+                        </p>
+                        <p className="text-[12px] text-[#8892A4] group-hover:text-white transition-colors duration-300 truncate">
+                          {link.value}
+                        </p>
+                      </div>
                     </a>
-                  </div>
-                  <a
-                    href={cvLink}
-                    download
-                    className="flex items-center justify-center gap-2 p-3 bg-[#393F44] rounded-lg text-pureWhite hover:bg-[#4a4f55] transition-all duration-300"
-                  >
-                    <MdDownload className="text-2xl" />
-                    <span className="text-sm md:text-base">Download CV</span>
-                  </a>
+                  ))}
                 </div>
               </div>
             </motion.div>

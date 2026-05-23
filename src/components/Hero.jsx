@@ -6,12 +6,9 @@ import {
 } from "framer-motion";
 import styles from "../styles";
 import image from "../assets/1735925475993.jpg";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { MdDownload } from "react-icons/md";
-import { cvLink } from "../variables";
-
 const colors = ["#FF6F61", "#FF4CA1", "#FFD580", "#A3D8FF", "#6F4CA1"];
 
 const Hero = () => {
@@ -60,88 +57,25 @@ const Hero = () => {
 
   return (
     <motion.section
-      className="relative w-full h-screen mx-auto z-10"
-      style={{
-        backgroundImage,
-      }}
+      id="home"
+      className="relative w-full h-screen mx-auto z-10 overflow-hidden"
+      style={{ backgroundImage }}
     >
       <div
-        className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-10 z-10`}
+        className={`${styles.paddingX} absolute inset-0 max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-6 sm:gap-10 pt-24 sm:pt-0 pb-16 sm:pb-0 z-10`}
       >
+        {/* Image — shows first on mobile, right side on desktop */}
         <motion.div
-          className="flex flex-row gap-5 z-10"
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          {/* Decorative Element */}
-          <div className="flex flex-col justify-start items-center">
-            <motion.div
-              className="w-5 h-5 rounded-full"
-              style={{
-                backgroundColor,
-              }}
-            />
-            <motion.div
-              className="w-1 h-60"
-              style={{
-                background: useMotionTemplate`linear-gradient(to bottom, ${color} 0%, transparent 100%)`,
-              }}
-            />
-          </div>
-
-          {/* Text Content */}
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white">
-              Hi, I&apos;m{" "}
-              <motion.span
-                style={{
-                  color: useMotionTemplate`${color}`,
-                }}
-              >
-                Amr
-              </motion.span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-white mt-4">
-              A Full Stack Developer
-            </p>
-            <p className="text-lg sm:text-xl text-gray-400 mt-2">
-              Code. Solve. Grow—Fueled by passion and grit.
-            </p>
-            <p className="text-base sm:text-lg text-gray-400 mt-2 max-w-md">
-              Motivated Full Stack Developer crafting responsive solutions with
-              React and Laravel. Building scalable applications that transform
-              user experiences, one line of code at a time.
-            </p>
-            <motion.a
-              href={cvLink}
-              target="_blank"
-              className="flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-charcoalGray justify-center"
-              whileHover={{ scale: 1.015 }}
-              whileTap={{ scale: 0.985 }}
-              style={{
-                border,
-                boxShadow,
-              }}
-            >
-              <MdDownload style={{ color }} />
-              Download CV
-            </motion.a>
-          </div>
-        </motion.div>
-
-        {/* Image and SVG Container */}
-        <motion.div
-          className="sm:ml-auto z-10 relative"
+          className="sm:order-2 sm:ml-auto z-10 relative shrink-0"
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <div className="">
+          <div>
             <img
               src={image}
               alt="Amr's profile"
-              className="w-60 h-60 sm:w-96 sm:h-96 object-cover rounded-full relative z-10"
+              className="w-40 h-40 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-cover rounded-full relative z-10"
             />
             <motion.svg
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[calc(100%+2rem)] h-[calc(100%+2rem)]"
@@ -155,8 +89,8 @@ const Hero = () => {
                 r="250"
                 style={{ stroke: color }}
                 strokeWidth="4"
-                strokeLinecap={"round"}
-                strokeLinejoin={"round"}
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 initial={{ strokeDasharray: "24 10 0 0" }}
                 animate={{
                   strokeDasharray: [
@@ -175,6 +109,49 @@ const Hero = () => {
             </motion.svg>
           </div>
         </motion.div>
+
+        {/* Text — below image on mobile, left side on desktop */}
+        <motion.div
+          className="sm:order-1 flex flex-row gap-4 z-10"
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          {/* Decorative line — hidden on mobile */}
+          <div className="hidden sm:flex flex-col justify-start items-center shrink-0">
+            <motion.div
+              className="w-5 h-5 rounded-full"
+              style={{ backgroundColor }}
+            />
+            <motion.div
+              className="w-1 h-48 lg:h-60"
+              style={{
+                background: useMotionTemplate`linear-gradient(to bottom, ${color} 0%, transparent 100%)`,
+              }}
+            />
+          </div>
+
+          {/* Text Content */}
+          <div className="text-center sm:text-left">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+              Hi, I&apos;m{" "}
+              <motion.span style={{ color: useMotionTemplate`${color}` }}>
+                Amr
+              </motion.span>
+            </h1>
+            <p className="text-lg sm:text-xl lg:text-2xl text-white mt-3">
+              Digital Twin Engineer in Training
+            </p>
+            <p className="text-base sm:text-lg text-gray-400 mt-2">
+              Code. Solve. Grow — Fueled by passion and grit.
+            </p>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-400 mt-2 max-w-xs sm:max-w-md mx-auto sm:mx-0">
+              Mechatronics Engineer &amp; Web Developer building toward Digital
+              Twin systems — bridging IoT, machine learning, and simulation to
+              connect the physical and digital worlds.
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       <div className="absolute inset-0 z-0">
@@ -182,6 +159,8 @@ const Hero = () => {
           <Stars radius={50} count={2500} factor={4} fade speed={2} />
         </Canvas>
       </div>
+
+      {/* Music toggle */}
       <button
         onClick={toggleMute}
         className="fixed bottom-4 left-4 z-50 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-all"
@@ -224,15 +203,13 @@ const Hero = () => {
           </svg>
         )}
       </button>
+
+      {/* Scroll indicator */}
       <motion.div
         className="absolute xs:bottom-10 bottom-5 w-full flex justify-center items-center"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{
-          duration: 1.5,
-          delay: 1, // This will make it appear after the main content
-          ease: "easeOut",
-        }}
+        transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
       >
         <a href="#about">
           <motion.div
@@ -242,9 +219,7 @@ const Hero = () => {
             <motion.div
               className="w-3 h-3 rounded-full mb-1"
               style={{ backgroundColor: color }}
-              animate={{
-                y: [0, 24, 0],
-              }}
+              animate={{ y: [0, 24, 0] }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
